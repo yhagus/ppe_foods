@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBFoodsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Barang">
+          <Key>
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Barang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Harga" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="ID_Karyawan" />
+          </Key>
+          <Property Name="ID_Karyawan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Umur" Type="tinyint" Nullable="false" />
+          <Property Name="Telepon" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pelanggan">
+          <Key>
+            <PropertyRef Name="ID_Pelanggan" />
+          </Key>
+          <Property Name="ID_Pelanggan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nama" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Telepon" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Penjualan">
+          <Key>
+            <PropertyRef Name="ID_Penjualan" />
+          </Key>
+          <Property Name="ID_Penjualan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Barang" Type="int" />
+          <Property Name="Tanggal" Type="date" Nullable="false" />
+          <Property Name="Jumlah" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Penjualan__ID_Ba__0CBAE877">
+          <End Role="Barang" Type="Self.Barang" Multiplicity="0..1" />
+          <End Role="Penjualan" Type="Self.Penjualan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barang">
+              <PropertyRef Name="ID_Barang" />
+            </Principal>
+            <Dependent Role="Penjualan">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBFoodsModelStoreContainer">
+          <EntitySet Name="Barang" EntityType="Self.Barang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Karyawan" EntityType="Self.Karyawan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pelanggan" EntityType="Self.Pelanggan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Penjualan" EntityType="Self.Penjualan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Penjualan__ID_Ba__0CBAE877" Association="Self.FK__Penjualan__ID_Ba__0CBAE877">
+            <End Role="Barang" EntitySet="Barang" />
+            <End Role="Penjualan" EntitySet="Penjualan" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBFoodsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Barang">
+          <Key>
+            <PropertyRef Name="ID_Barang" />
+          </Key>
+          <Property Name="ID_Barang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Harga" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Penjualans" Relationship="Self.FK__Penjualan__ID_Ba__0CBAE877" FromRole="Barang" ToRole="Penjualan" />
+        </EntityType>
+        <EntityType Name="Karyawan">
+          <Key>
+            <PropertyRef Name="ID_Karyawan" />
+          </Key>
+          <Property Name="ID_Karyawan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Umur" Type="Byte" Nullable="false" />
+          <Property Name="Telepon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pelanggan">
+          <Key>
+            <PropertyRef Name="ID_Pelanggan" />
+          </Key>
+          <Property Name="ID_Pelanggan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nama" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telepon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Penjualan">
+          <Key>
+            <PropertyRef Name="ID_Penjualan" />
+          </Key>
+          <Property Name="ID_Penjualan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Barang" Type="Int32" />
+          <Property Name="Tanggal" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Jumlah" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Barang" Relationship="Self.FK__Penjualan__ID_Ba__0CBAE877" FromRole="Penjualan" ToRole="Barang" />
+        </EntityType>
+        <Association Name="FK__Penjualan__ID_Ba__0CBAE877">
+          <End Role="Barang" Type="Self.Barang" Multiplicity="0..1" />
+          <End Role="Penjualan" Type="Self.Penjualan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barang">
+              <PropertyRef Name="ID_Barang" />
+            </Principal>
+            <Dependent Role="Penjualan">
+              <PropertyRef Name="ID_Barang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBFoodsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Barangs" EntityType="Self.Barang" />
+          <EntitySet Name="Karyawans" EntityType="Self.Karyawan" />
+          <EntitySet Name="Pelanggans" EntityType="Self.Pelanggan" />
+          <EntitySet Name="Penjualans" EntityType="Self.Penjualan" />
+          <AssociationSet Name="FK__Penjualan__ID_Ba__0CBAE877" Association="Self.FK__Penjualan__ID_Ba__0CBAE877">
+            <End Role="Barang" EntitySet="Barangs" />
+            <End Role="Penjualan" EntitySet="Penjualans" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBFoodsModelStoreContainer" CdmEntityContainer="DBFoodsEntities">
+          <EntitySetMapping Name="Barangs">
+            <EntityTypeMapping TypeName="DBFoodsModel.Barang">
+              <MappingFragment StoreEntitySet="Barang">
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Harga" ColumnName="Harga" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Karyawans">
+            <EntityTypeMapping TypeName="DBFoodsModel.Karyawan">
+              <MappingFragment StoreEntitySet="Karyawan">
+                <ScalarProperty Name="ID_Karyawan" ColumnName="ID_Karyawan" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Umur" ColumnName="Umur" />
+                <ScalarProperty Name="Telepon" ColumnName="Telepon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pelanggans">
+            <EntityTypeMapping TypeName="DBFoodsModel.Pelanggan">
+              <MappingFragment StoreEntitySet="Pelanggan">
+                <ScalarProperty Name="ID_Pelanggan" ColumnName="ID_Pelanggan" />
+                <ScalarProperty Name="Nama" ColumnName="Nama" />
+                <ScalarProperty Name="Telepon" ColumnName="Telepon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Penjualans">
+            <EntityTypeMapping TypeName="DBFoodsModel.Penjualan">
+              <MappingFragment StoreEntitySet="Penjualan">
+                <ScalarProperty Name="ID_Penjualan" ColumnName="ID_Penjualan" />
+                <ScalarProperty Name="ID_Barang" ColumnName="ID_Barang" />
+                <ScalarProperty Name="Tanggal" ColumnName="Tanggal" />
+                <ScalarProperty Name="Jumlah" ColumnName="Jumlah" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
